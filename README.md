@@ -18,13 +18,15 @@ This will give you a bash prompt like this:
 
 [user@cesm2.1.3 ~]$
 
-From here, you can follow the standard CESM documentation on creating / building / submitting cases - in this case, the submission runs in the foreground.  An example set of commands to build a 2-degree F2000climo (scientifically unsupported, just used as an example) case, with a case name / directory of 'test1' follows:
+From here, you can follow the standard CESM documentation on creating / building / submitting cases - in this case, the submission runs in the foreground.  An example set of commands to build a 2-degree F2000climo (scientifically unsupported, just used as an example) case, with a case name / directory of 'test1' follows:<br /><br />
+<i>
+create_newcase --case test1 --compset F2000climo --res f19_g17 --run-unsupported<br />
+cd test1<br />
+./xmlchange NTASKS=1 <br />
+./case.setup <br />
+./case.build <br />
+./case.submit <br />
+</i>
 
-% create_newcase --case test1 --compset F2000climo --res f19_g17 --run-unsupported
-% cd test1
-% ./xmlchange NTASKS=1
-% ./case.setup
-% ./case.build
-% ./case.submit
 
 (These will change soon; this is just a is-it-working example.)
