@@ -17,7 +17,7 @@ RUN mkdir -p /opt/ncar && \
 RUN groupadd ncar && \
     useradd -c 'CESM User' -d /home/user -g ncar -m -s /bin/bash user && \
     yum install -y ftp && \
-    echo 'export CESMDATAROOT=${HOME}/inputdata' >> /etc/profile.d/cesm.sh && \
+    echo 'export CESMDATAROOT=${HOME}' >> /etc/profile.d/cesm.sh && \
     echo 'export CIME_MACHINE=container' >> /etc/profile.d/cesm.sh && \
     echo 'export USER=$(whoami)' >> /etc/profile.d/cesm.sh && \
     echo 'export PS1="[\u@cesm2.1.3 \W]\$ "' >> /etc/profile.d/cesm.sh && \
