@@ -29,6 +29,8 @@ RUN groupadd ncar && \
 COPY Files/config_compilers.xml /opt/ncar/cesm2/cime/config/cesm/machines/
 COPY Files/config_machines.xml /opt/ncar/cesm2/cime/config/cesm/machines/
 COPY Files/config_inputdata.xml /opt/ncar/cesm2/cime/config/cesm/
+COPY Files/case_setup.py /opt/ncar/cesm2/cime/scripts/lib/CIME/case/case_setup.py
+
 
 USER user
 WORKDIR /home/user

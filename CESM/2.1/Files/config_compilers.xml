@@ -160,9 +160,12 @@ using a fortran linker.
     <append MODEL="gptl"> -DHAVE_NANOTIME -DBIT64 -DHAVE_VPRINTF -DHAVE_BACKTRACE -DHAVE_SLASHPROC -DHAVE_COMM_F2C -DHAVE_TIMES -DHAVE_GETTIMEOFDAY </append>
   </CPPDEFS>
   <NETCDF_PATH>/usr/local</NETCDF_PATH>
+  <PNETCDF_PATH>/usr/local</PNETCDF_PATH>
   <LDFLAGS>
-    <append> -llapack -lblas </append>
   </LDFLAGS>
+  <SLIBS>
+    <append> -lnetcdf -lnetcdff -llapack -lblas </append>
+  </SLIBS>
 </compiler>
 
 <compiler COMPILER="ibm">
