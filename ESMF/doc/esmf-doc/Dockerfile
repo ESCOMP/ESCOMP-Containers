@@ -2,7 +2,7 @@
 # Build and collect ESMF documentation #
 ########################################
 
-FROM escomp/esmf-doc-anvil
+FROM escomp/esmf-doc-base
 
 ARG ESMF_BRANCH=""
 RUN echo "ESMF_BRANCH=$ESMF_BRANCH"
