@@ -1,0 +1,2 @@
+%alias xmlchange ./xmlchange %l
+%alias testme echo "Foobar!"
