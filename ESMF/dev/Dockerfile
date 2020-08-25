@@ -37,4 +37,6 @@ RUN export ESMF_DIR=/tmp/sources/esmf && \
     cd && \
     python -c "import ESMF"
 
-RUN rm -rf /tmp/sources
+# Do not remove sources for development builds. These are used for testing.
+ENV ESMF_DIR=/tmp/sources/esmf
+ENV ESMPY_DIR=${ESMF_DIR}/src/addon/ESMPy
