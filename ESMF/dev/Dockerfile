@@ -1,7 +1,8 @@
-FROM escomp/centos8
+ARG DOCKER_NAMESPACE=""
+
+FROM ${DOCKER_NAMESPACE}/centos8
 
 ARG ESMF_BRANCH=""
-RUN echo "ESMF_BRANCH=$ESMF_BRANCH"
 
 # Build ESMF ==================================================================
 
