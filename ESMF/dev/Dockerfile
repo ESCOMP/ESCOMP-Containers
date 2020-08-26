@@ -7,6 +7,7 @@ ARG ESMF_BRANCH=""
 # Build ESMF ==================================================================
 
 RUN mkdir -p /tmp/sources && \
+    mkdir -p /tmp/artifacts && \
     cd /tmp/sources && \
     git clone --branch ${ESMF_BRANCH} --depth 1 https://github.com/esmf-org/esmf.git && \
     cd esmf && \
@@ -21,10 +22,10 @@ RUN mkdir -p /tmp/sources && \
     export ESMF_INSTALL_LIBDIR=${ESMF_INSTALL_PREFIX}/lib && \
     export ESMF_INSTALL_MODDIR=${ESMF_INSTALL_PREFIX}/mod && \
     export ESMF_TESTEXHAUSTIVE="OFF" && \
-    make info && \
-    make -j $(nproc) && \
+    make info 2>&1 | tee /tmp/artifacts/esmf-make-info.out && \
+    make -j $(nproc) 2>&1 | tee /tmp/artifacts/esmf-make.out && \
 #    make check && \
-    make install
+    make install 2>&1 | tee /tmp/artifacts/esmf-make-install.out
 
 # Build ESMPy =================================================================
 
