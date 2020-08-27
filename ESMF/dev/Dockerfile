@@ -1,35 +1,39 @@
-FROM escomp/centos8
+ARG DOCKER_NAMESPACE=""
+
+FROM ${DOCKER_NAMESPACE}/centos8
 
 ARG ESMF_BRANCH=""
-RUN echo "ESMF_BRANCH=$ESMF_BRANCH"
 
 # Build ESMF ==================================================================
 
+ENV ESMF_DIR=/tmp/sources/esmf
+ENV ESMPY_DIR=${ESMF_DIR}/src/addon/ESMPy
+ENV ESMFMKFILE=/usr/local/lib/esmf.mk
+
+ENV ESMF_COMM=mpich3
+ENV ESMF_BOPT="g"
+ENV ESMF_NETCDF="nc-config"
+ENV ESMF_INSTALL_PREFIX=/usr/local
+ENV ESMF_INSTALL_BINDIR=${ESMF_INSTALL_PREFIX}/bin
+ENV ESMF_INSTALL_DOCDIR=${ESMF_INSTALL_PREFIX}/doc
+ENV ESMF_INSTALL_HEADERDIR=${ESMF_INSTALL_PREFIX}/include
+ENV ESMF_INSTALL_LIBDIR=${ESMF_INSTALL_PREFIX}/lib
+ENV ESMF_INSTALL_MODDIR=${ESMF_INSTALL_PREFIX}/mod
+ENV ESMF_TESTEXHAUSTIVE="ON"
+
 RUN mkdir -p /tmp/sources && \
+    mkdir -p /tmp/artifacts && \
     cd /tmp/sources && \
     git clone --branch ${ESMF_BRANCH} --depth 1 https://github.com/esmf-org/esmf.git && \
     cd esmf && \
-    export ESMF_DIR=/tmp/sources/esmf && \
-    export ESMF_COMM=mpich3 && \
-    export ESMF_BOPT="g" && \
-    export ESMF_NETCDF="nc-config" && \
-    export ESMF_INSTALL_PREFIX=/usr/local && \
-    export ESMF_INSTALL_BINDIR=${ESMF_INSTALL_PREFIX}/bin && \
-    export ESMF_INSTALL_DOCDIR=${ESMF_INSTALL_PREFIX}/doc && \
-    export ESMF_INSTALL_HEADERDIR=${ESMF_INSTALL_PREFIX}/include && \
-    export ESMF_INSTALL_LIBDIR=${ESMF_INSTALL_PREFIX}/lib && \
-    export ESMF_INSTALL_MODDIR=${ESMF_INSTALL_PREFIX}/mod && \
-    export ESMF_TESTEXHAUSTIVE="OFF" && \
-    make info && \
-    make -j $(nproc) && \
+    make info 2>&1 | tee /tmp/artifacts/esmf-make-info.out && \
+    make -j $(nproc) 2>&1 | tee /tmp/artifacts/esmf-make.out && \
 #    make check && \
-    make install
+    make install 2>&1 | tee /tmp/artifacts/esmf-make-install.out
 
 # Build ESMPy =================================================================
 
-RUN export ESMF_DIR=/tmp/sources/esmf && \
-    export ESMFMKFILE=/usr/local/lib/esmf.mk && \
-    cd ${ESMF_DIR}/src/addon/ESMPy && \
+RUN cd ${ESMPY_DIR} && \
     pip3 install numpy nose && \
     python setup.py build --ESMFMKFILE=${ESMFMKFILE} && \
 #    python setup.py test && \
@@ -37,6 +41,4 @@ RUN export ESMF_DIR=/tmp/sources/esmf && \
     cd && \
     python -c "import ESMF"
 
-# Do not remove sources for development builds. These are used for testing.
-ENV ESMF_DIR=/tmp/sources/esmf
-ENV ESMPY_DIR=${ESMF_DIR}/src/addon/ESMPy
+WORKDIR ${ESMF_DIR}
