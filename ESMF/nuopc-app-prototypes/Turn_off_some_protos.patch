@@ -1,0 +1,96 @@
+Index: testProtos.sh
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- testProtos.sh	(revision bba5a9267330d78eb0fe7a8a9c92d22e2256e1a4)
++++ testProtos.sh	(date 1599068550236)
+@@ -257,47 +257,47 @@
+ 
+ # function    # proto directory                           # executable
+ TestProto     AsyncIOBlockingProto                        asyncIOApp
+-TestProto     AsyncIONonblockingProto                     asyncIOApp
+-TestProto     AtmOcnConProto                              esmApp
+-TestProto     AtmOcnConOptsProto                          esmApp
+-TestProto     AtmOcnCplListProto                          esmApp
+-TestProto     AtmOcnCplSetProto                           esmApp
+-TestProto     AtmOcnFDSynoProto                           esmApp
+-TestProto     AtmOcnIceSimpleImplicitProto                esmApp
+-TestProto     AtmOcnImplicitProto                         esmApp
+-TestProto     AtmOcnLndProto                              esmApp
+-TestProto     AtmOcnLogNoneProto                          esmApp
+-TestProto     AtmOcnMedIngestFromConfigProto              esmApp
+-TestProto     AtmOcnMedIngestFromInternalProto            esmApp
+-TestProto     AtmOcnMedPetListProto                       esmApp
+-TestProto     AtmOcnMedPetListTimescalesProto             esmApp
+-TestProto     AtmOcnMedPetListTimescalesSplitFastProto    esmApp
+-TestProto     AtmOcnMedProto                              esmApp
+-TestProto     AtmOcnMirrorFieldsProto                     esmApp
+-TestProto     AtmOcnPetListProto                          esmApp
+-TestProto     AtmOcnProto                                 esmApp
+-TestProto     AtmOcnRtmTwoTimescalesProto                 esmApp
+-TestProto     AtmOcnScalarProto                           esmApp
+-TestSelectExternalProto   AtmOcnSelectExternalProto       esmApp
+-TestSelectProto           AtmOcnSelectProto               esmApp
+-TestProto     AtmOcnSimpleImplicitProto                   esmApp
+-TestProto     AtmOcnTransferGridProto                     esmApp
+-TestProto     AtmOcnTransferLocStreamProto                esmApp
+-TestProto     AtmOcnTransferMeshProto                     esmApp
+-TestExplorer  ComponentExplorer                           nuopcExplorerApp
+-TestProto     CustomFieldDictionaryProto                  mainApp
+-TestProto     DriverInDriverProto                         mainApp
+-TestProto     DriverInDriverDataDepProto                  mainApp
+-TestProto     DynPhyProto                                 esmApp
+-TestProto     ExternalDriverAPIProto                      externalApp
+-TestProto     GenericMediatorProto                        app
+-TestProto     HierarchyProto                              esmApp
+-TestProto     NamespaceProto                              mainApp
+-TestProto     NestingMultipleProto                        mainApp
+-TestProto     NestingSingleProto                          mainApp
+-TestProto     NestingTelescopeMultipleProto               mainApp
+-TestProto     SingleModelProto                            mainApp
+-TestProto     SingleModelOpenMPProto                      mainApp
++#TestProto     AsyncIONonblockingProto                     asyncIOApp
++#TestProto     AtmOcnConProto                              esmApp
++#TestProto     AtmOcnConOptsProto                          esmApp
++#TestProto     AtmOcnCplListProto                          esmApp
++#TestProto     AtmOcnCplSetProto                           esmApp
++#TestProto     AtmOcnFDSynoProto                           esmApp
++#TestProto     AtmOcnIceSimpleImplicitProto                esmApp
++#TestProto     AtmOcnImplicitProto                         esmApp
++#TestProto     AtmOcnLndProto                              esmApp
++#TestProto     AtmOcnLogNoneProto                          esmApp
++#TestProto     AtmOcnMedIngestFromConfigProto              esmApp
++#TestProto     AtmOcnMedIngestFromInternalProto            esmApp
++#TestProto     AtmOcnMedPetListProto                       esmApp
++#TestProto     AtmOcnMedPetListTimescalesProto             esmApp
++#TestProto     AtmOcnMedPetListTimescalesSplitFastProto    esmApp
++#TestProto     AtmOcnMedProto                              esmApp
++#TestProto     AtmOcnMirrorFieldsProto                     esmApp
++#TestProto     AtmOcnPetListProto                          esmApp
++#TestProto     AtmOcnProto                                 esmApp
++#TestProto     AtmOcnRtmTwoTimescalesProto                 esmApp
++#TestProto     AtmOcnScalarProto                           esmApp
++#TestSelectExternalProto   AtmOcnSelectExternalProto       esmApp
++#TestSelectProto           AtmOcnSelectProto               esmApp
++#TestProto     AtmOcnSimpleImplicitProto                   esmApp
++#TestProto     AtmOcnTransferGridProto                     esmApp
++#TestProto     AtmOcnTransferLocStreamProto                esmApp
++#TestProto     AtmOcnTransferMeshProto                     esmApp
++#TestExplorer  ComponentExplorer                           nuopcExplorerApp
++#TestProto     CustomFieldDictionaryProto                  mainApp
++#TestProto     DriverInDriverProto                         mainApp
++#TestProto     DriverInDriverDataDepProto                  mainApp
++#TestProto     DynPhyProto                                 esmApp
++#TestProto     ExternalDriverAPIProto                      externalApp
++#TestProto     GenericMediatorProto                        app
++#TestProto     HierarchyProto                              esmApp
++#TestProto     NamespaceProto                              mainApp
++#TestProto     NestingMultipleProto                        mainApp
++#TestProto     NestingSingleProto                          mainApp
++#TestProto     NestingTelescopeMultipleProto               mainApp
++#TestProto     SingleModelProto                            mainApp
++#TestProto     SingleModelOpenMPProto                      mainApp
+ 
+ echo "== TEST SUMMARY START =="
+ i=1
