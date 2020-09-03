@@ -8,7 +8,7 @@ case "${1}" in
   ;;
 
   meta_test)
-    python /opt/meta_test.py -v 2>&1 | tee "${ESMF_ARTIFACTS}"/meta_test.out || true
+    python /opt/meta_test.py -v 2>&1 | tee "${ESMF_ARTIFACTS}"/meta_test.out
   ;;
 
   prep_artifacts)
