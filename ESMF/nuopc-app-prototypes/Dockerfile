@@ -9,8 +9,8 @@ RUN git checkout ${ESMF_BRANCH} || echo "WARNING: ESMF_BRANCH does not exist. Ch
 RUN ln -s /usr/bin/make /usr/bin/gmake || echo "INFO: gmake symlink already exists"
 
 #tdk:rm
-ADD ./Turn_off_some_protos.patch /opt/Turn_off_some_protos.patch
-RUN git apply /opt/Turn_off_some_protos.patch
+#ADD ./Turn_off_some_protos.patch /opt/Turn_off_some_protos.patch
+#RUN git apply /opt/Turn_off_some_protos.patch
 
 ENV ESMF_ARTIFACTS=/opt/artifacts
 RUN mkdir -p ${ESMF_ARTIFACTS}
