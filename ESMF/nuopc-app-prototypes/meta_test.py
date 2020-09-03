@@ -14,6 +14,7 @@ class TestsContainer(unittest.TestCase):
 
     def setUp(self):
         print(self._testMethodName)
+        print('\n')
 
     def test_all_tests_ran(self):
         self.assertEqual(self.expected, self.ran)
