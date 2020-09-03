@@ -4,6 +4,8 @@ set -Eeuxo pipefail
 case "${1}" in
 
   testProtos)
+    # Catch || to true require to allow scripts to continue? Seems like a hack
+    # and it is, but is required given testing.
     ./testProtos.sh 2>&1 | tee "${ESMF_ARTIFACTS}"/testProtos.out || true
   ;;
 

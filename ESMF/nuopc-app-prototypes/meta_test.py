@@ -12,6 +12,9 @@ class TestsContainer(unittest.TestCase):
     ran = 0
     logs = os.getcwd()
 
+    def setUp(self):
+        print(self.shortDescription())
+
     def test_all_tests_ran(self):
         self.assertEqual(self.expected, self.ran)
 
@@ -45,6 +48,7 @@ class TestsContainer(unittest.TestCase):
 def make_test_function(description, pass_fail):
     def test(self):
         self.assertEqual(pass_fail, "PASS", description)
+    test.__doc__ = description
     return test
 
 
