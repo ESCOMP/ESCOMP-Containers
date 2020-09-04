@@ -41,6 +41,6 @@ RUN cd ${ESMPY_DIR} && \
     cd && \
     python -c "import ESMF"
 
-RUN cd /tmp && zip -rv artifacts.zip /tmp/artifacts
+RUN cd /tmp && zip -rv artifacts.zip artifacts
 
 WORKDIR ${ESMF_DIR}
