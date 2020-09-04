@@ -28,7 +28,6 @@ RUN mkdir -p /tmp/sources && \
     cd esmf && \
     make info 2>&1 | tee /tmp/artifacts/esmf-make-info.out && \
     make -j $(nproc) 2>&1 | tee /tmp/artifacts/esmf-make.out && \
-#    make check && \
     make install 2>&1 | tee /tmp/artifacts/esmf-make-install.out
 
 # Build ESMPy =================================================================
@@ -36,9 +35,10 @@ RUN mkdir -p /tmp/sources && \
 RUN cd ${ESMPY_DIR} && \
     pip3 install numpy nose && \
     python setup.py build --ESMFMKFILE=${ESMFMKFILE} && \
-#    python setup.py test && \
     python setup.py install && \
     cd && \
     python -c "import ESMF"
+
+RUN cd /tmp && zip -rv artifacts.zip artifacts
 
 WORKDIR ${ESMF_DIR}
