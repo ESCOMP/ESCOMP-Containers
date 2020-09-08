@@ -7,6 +7,16 @@ if ! [[ -z "${PANGEO_SCRATCH_PREFIX}" ]] && ! [[ -z "${JUPYTERHUB_USER}" ]]; the
     export PANGEO_SCRATCH="${PANGEO_SCRATCH_PREFIX}/${JUPYTERHUB_USER}/"
 fi
 
+if [[ ! -f /home/user/.tutorial_initialized ]]; then
+  cp -rp /srv/tutorials /home/user
+  touch /home/user/.tutorial_initialized
+fi 
+
+# Change the CPU counts:
+CPUS=$(grep -c processor /proc/cpuinfo)
+sudo xmlstarlet ed --inplace -u "config_machines/machine[@MACH='container']/MAX_TASKS_PER_NODE" -v ${CPUS} ${CESMROOT}/cime/config/cesm/machines/config_machines.xml
+sudo xmlstarlet ed --inplace -u "config_machines/machine[@MACH='container']/MAX_MPITASKS_PER_NODE" -v ${CPUS} ${CESMROOT}/cime/config/cesm/machines/config_machines.xml
+
 # ==== ONLY EDIT WITHIN THIS BLOCK =====
 
 exec "$@"

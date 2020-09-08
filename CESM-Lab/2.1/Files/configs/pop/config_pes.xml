@@ -1,0 +1,702 @@
+<?xml version="1.0"?>
+
+<config_pes>
+
+  <grid name="any">
+    <mach name="container">
+      <pes pesize="any" compset="any">
+        <ntasks>
+          <ntasks_ocn>-1</ntasks_ocn>
+          <ntasks_ice>-1</ntasks_ice>
+          <ntasks_cpl>-1</ntasks_cpl>
+          <ntasks_wav>-1</ntasks_wav>
+          <ntasks_atm>-1</ntasks_atm>
+          <ntasks_glc>-1</ntasks_glc>
+          <ntasks_lnd>-1</ntasks_lnd>
+          <ntasks_rof>-1</ntasks_rof>
+        </ntasks>
+        <nthrds>
+          <nthrds_ocn>1</nthrds_ocn>
+          <nthrds_ice>1</nthrds_ice>
+          <nthrds_cpl>1</nthrds_cpl>
+          <nthrds_wav>1</nthrds_wav>
+          <nthrds_atm>1</nthrds_atm>
+          <nthrds_glc>1</nthrds_glc>
+          <nthrds_lnd>1</nthrds_lnd>
+          <nthrds_rof>1</nthrds_rof>
+        </nthrds>
+        <rootpe>
+          <rootpe_ocn>0</rootpe_ocn>
+          <rootpe_ice>0</rootpe_ice>
+          <rootpe_cpl>0</rootpe_cpl>
+          <rootpe_wav>0</rootpe_wav>
+          <rootpe_atm>0</rootpe_atm>
+          <rootpe_glc>0</rootpe_glc>
+          <rootpe_lnd>0</rootpe_lnd>
+          <rootpe_rof>0</rootpe_rof>
+        </rootpe>
+      </pes>
+    </mach>
+  </grid>
+  <!-- Default for un-recognized grid -->
+  <grid name="any">
+
+    <!-- Un-recognized grid on any machine -->
+    <mach name="any">
+
+      <!-- C, C+ECO (e.g., C1850ECO), G, and G+ECO (e.g., G1850ECO) when either resolution or machine is un-recognized:
+           all components run on single node with 1 thread -->
+      <pes pesize="any" compset="_DATM.*_POP2">
+        <comment>Either did not recognize the resolution or the machine name specified</comment>
+        <!-- negative values mean number of nodes and are translated to number of tasks in the case -->
+        <ntasks>
+          <ntasks_ocn>-1</ntasks_ocn>
+          <ntasks_ice>-1</ntasks_ice>
+          <ntasks_cpl>-1</ntasks_cpl>
+          <ntasks_wav>-1</ntasks_wav>
+          <ntasks_atm>-1</ntasks_atm>
+          <ntasks_glc>-1</ntasks_glc>
+          <ntasks_lnd>-1</ntasks_lnd>
+          <ntasks_rof>-1</ntasks_rof>
+        </ntasks>
+        <nthrds>
+          <nthrds_ocn>1</nthrds_ocn>
+          <nthrds_ice>1</nthrds_ice>
+          <nthrds_cpl>1</nthrds_cpl>
+          <nthrds_wav>1</nthrds_wav>
+          <nthrds_atm>1</nthrds_atm>
+          <nthrds_glc>1</nthrds_glc>
+          <nthrds_lnd>1</nthrds_lnd>
+          <nthrds_rof>1</nthrds_rof>
+        </nthrds>
+        <rootpe>
+          <rootpe_ocn>0</rootpe_ocn>
+          <rootpe_ice>0</rootpe_ice>
+          <rootpe_cpl>0</rootpe_cpl>
+          <rootpe_wav>0</rootpe_wav>
+          <rootpe_atm>0</rootpe_atm>
+          <rootpe_glc>0</rootpe_glc>
+          <rootpe_lnd>0</rootpe_lnd>
+          <rootpe_rof>0</rootpe_rof>
+        </rootpe>
+      </pes>
+    </mach>
+  </grid>
+
+  <!-- Defaults for gx3v7 resolution -->
+  <grid name="oi%gx3v7">
+
+    <!-- gx3v7 resolution on cheyenne  -->
+    <mach name="cheyenne">
+
+      <!-- C and C+ECO (e.g., C1850ECO) with gx3v7 on cheyenne:
+           all components share 72x1 -->
+      <pes pesize="any" compset="_DATM.*_DICE.*_POP2">
+        <comment>C or C+ECO (e.g., C1850ECO); gx3v7 resolution on cheyenne</comment>
+        <ntasks>
+          <ntasks_ocn>72</ntasks_ocn>
+          <ntasks_ice>72</ntasks_ice>
+          <ntasks_cpl>72</ntasks_cpl>
+          <ntasks_wav>72</ntasks_wav>
+          <ntasks_atm>72</ntasks_atm>
+          <ntasks_glc>72</ntasks_glc>
+          <ntasks_lnd>72</ntasks_lnd>
+          <ntasks_rof>72</ntasks_rof>
+        </ntasks>
+        <nthrds>
+          <nthrds_ocn>1</nthrds_ocn>
+          <nthrds_ice>1</nthrds_ice>
+          <nthrds_cpl>1</nthrds_cpl>
+          <nthrds_wav>1</nthrds_wav>
+          <nthrds_atm>1</nthrds_atm>
+          <nthrds_glc>1</nthrds_glc>
+          <nthrds_lnd>1</nthrds_lnd>
+          <nthrds_rof>1</nthrds_rof>
+        </nthrds>
+        <rootpe>
+          <rootpe_ocn>0</rootpe_ocn>
+          <rootpe_ice>0</rootpe_ice>
+          <rootpe_cpl>0</rootpe_cpl>
+          <rootpe_wav>0</rootpe_wav>
+          <rootpe_atm>0</rootpe_atm>
+          <rootpe_glc>0</rootpe_glc>
+          <rootpe_lnd>0</rootpe_lnd>
+          <rootpe_rof>0</rootpe_rof>
+        </rootpe>
+      </pes>
+
+      <!-- G with gx3v7 on cheyenne:
+           POP gets 72x1
+           CICE gets 36x1
+           all other components share 36x1 -->
+      <pes pesize="any" compset="_DATM.*_CICE.*_POP2[^%]">
+        <comment>G; gx3v7 resolution on cheyenne</comment>
+        <ntasks>
+          <ntasks_ocn>72</ntasks_ocn>
+          <ntasks_ice>36</ntasks_ice>
+          <ntasks_cpl>36</ntasks_cpl>
+          <ntasks_wav>36</ntasks_wav>
+          <ntasks_atm>36</ntasks_atm>
+          <ntasks_glc>36</ntasks_glc>
+          <ntasks_lnd>36</ntasks_lnd>
+          <ntasks_rof>36</ntasks_rof>
+        </ntasks>
+        <nthrds>
+          <nthrds_ocn>1</nthrds_ocn>
+          <nthrds_ice>1</nthrds_ice>
+          <nthrds_cpl>1</nthrds_cpl>
+          <nthrds_wav>1</nthrds_wav>
+          <nthrds_atm>1</nthrds_atm>
+          <nthrds_glc>1</nthrds_glc>
+          <nthrds_lnd>1</nthrds_lnd>
+          <nthrds_rof>1</nthrds_rof>
+        </nthrds>
+        <rootpe>
+          <rootpe_ocn>72</rootpe_ocn>
+          <rootpe_ice>36</rootpe_ice>
+          <rootpe_cpl>36</rootpe_cpl>
+          <rootpe_wav>0</rootpe_wav>
+          <rootpe_atm>0</rootpe_atm>
+          <rootpe_glc>0</rootpe_glc>
+          <rootpe_lnd>0</rootpe_lnd>
+          <rootpe_rof>0</rootpe_rof>
+        </rootpe>
+      </pes>
+
+      <!-- G+ECO (e.g., G1850ECO) with gx3v7 on cheyenne:
+           POP gets 72x1
+           all other components share 36x1 -->
+      <pes pesize="any" compset="_DATM.*_CICE.*_POP2%ECO">
+        <comment>G+ECO (e.g., G1850ECO); gx3v7 resolution on cheyenne</comment>
+        <ntasks>
+          <ntasks_ocn>72</ntasks_ocn>
+          <ntasks_ice>36</ntasks_ice>
+          <ntasks_cpl>36</ntasks_cpl>
+          <ntasks_wav>36</ntasks_wav>
+          <ntasks_atm>36</ntasks_atm>
+          <ntasks_glc>36</ntasks_glc>
+          <ntasks_lnd>36</ntasks_lnd>
+          <ntasks_rof>36</ntasks_rof>
+        </ntasks>
+        <nthrds>
+          <nthrds_ocn>1</nthrds_ocn>
+          <nthrds_ice>1</nthrds_ice>
+          <nthrds_cpl>1</nthrds_cpl>
+          <nthrds_wav>1</nthrds_wav>
+          <nthrds_atm>1</nthrds_atm>
+          <nthrds_glc>1</nthrds_glc>
+          <nthrds_lnd>1</nthrds_lnd>
+          <nthrds_rof>1</nthrds_rof>
+        </nthrds>
+        <rootpe>
+          <rootpe_ocn>36</rootpe_ocn>
+          <rootpe_ice>0</rootpe_ice>
+          <rootpe_cpl>0</rootpe_cpl>
+          <rootpe_wav>0</rootpe_wav>
+          <rootpe_atm>0</rootpe_atm>
+          <rootpe_glc>0</rootpe_glc>
+          <rootpe_lnd>0</rootpe_lnd>
+          <rootpe_rof>0</rootpe_rof>
+        </rootpe>
+      </pes>
+    </mach>
+
+    <!-- gx3v7 resolution on hobart -->
+    <mach name="hobart">
+
+      <!-- C, C+ECO (e.g., C1850ECO), G, and G+ECO (e.g., G1850ECO) with gx3v7 on hobart:
+           all components share 24x1 -->
+      <pes pesize="any" compset="_DATM.*_POP2">
+        <comment>gx3v7 resolution on hobart</comment>
+        <ntasks>
+          <ntasks_ocn>48</ntasks_ocn>
+          <ntasks_ice>48</ntasks_ice>
+          <ntasks_cpl>48</ntasks_cpl>
+          <ntasks_wav>48</ntasks_wav>
+          <ntasks_atm>48</ntasks_atm>
+          <ntasks_glc>48</ntasks_glc>
+          <ntasks_lnd>48</ntasks_lnd>
+          <ntasks_rof>48</ntasks_rof>
+        </ntasks>
+        <nthrds>
+          <nthrds_ocn>1</nthrds_ocn>
+          <nthrds_ice>1</nthrds_ice>
+          <nthrds_cpl>1</nthrds_cpl>
+          <nthrds_wav>1</nthrds_wav>
+          <nthrds_atm>1</nthrds_atm>
+          <nthrds_glc>1</nthrds_glc>
+          <nthrds_lnd>1</nthrds_lnd>
+          <nthrds_rof>1</nthrds_rof>
+        </nthrds>
+        <rootpe>
+          <rootpe_ocn>0</rootpe_ocn>
+          <rootpe_ice>0</rootpe_ice>
+          <rootpe_cpl>0</rootpe_cpl>
+          <rootpe_wav>0</rootpe_wav>
+          <rootpe_atm>0</rootpe_atm>
+          <rootpe_glc>0</rootpe_glc>
+          <rootpe_lnd>0</rootpe_lnd>
+          <rootpe_rof>0</rootpe_rof>
+        </rootpe>
+      </pes>
+    </mach>
+  </grid>
+
+  <!-- Defaults for gx1v6, gx1v7, or tx1v1 resolution -->
+  <grid name="oi%gx1v[67]|oi%tx1v1">
+
+    <!-- gx1v6, gx1v7, or tx1v1 resolution on cheyenne  -->
+    <mach name="cheyenne">
+
+      <!-- C compset, gx1v6, gx1v7, or tx1v1 on cheyenne:
+           POP gets 144x1
+           all other components share 36x1 -->
+      <pes pesize="any" compset="_DATM.*_DICE.*_POP2[^%]">
+        <comment>C; gx1v6, gx1v7, or tx1v1 resolution on cheyenne</comment>
+        <ntasks>
+          <ntasks_ocn>144</ntasks_ocn>
+          <ntasks_ice>36</ntasks_ice>
+          <ntasks_cpl>36</ntasks_cpl>
+          <ntasks_wav>36</ntasks_wav>
+          <ntasks_atm>36</ntasks_atm>
+          <ntasks_glc>36</ntasks_glc>
+          <ntasks_lnd>36</ntasks_lnd>
+          <ntasks_rof>36</ntasks_rof>
+        </ntasks>
+        <nthrds>
+          <nthrds_ocn>1</nthrds_ocn>
+          <nthrds_ice>1</nthrds_ice>
+          <nthrds_cpl>1</nthrds_cpl>
+          <nthrds_wav>1</nthrds_wav>
+          <nthrds_atm>1</nthrds_atm>
+          <nthrds_glc>1</nthrds_glc>
+          <nthrds_lnd>1</nthrds_lnd>
+          <nthrds_rof>1</nthrds_rof>
+        </nthrds>
+        <rootpe>
+          <rootpe_ocn>36</rootpe_ocn>
+          <rootpe_ice>0</rootpe_ice>
+          <rootpe_cpl>0</rootpe_cpl>
+          <rootpe_wav>0</rootpe_wav>
+          <rootpe_atm>0</rootpe_atm>
+          <rootpe_glc>0</rootpe_glc>
+          <rootpe_lnd>0</rootpe_lnd>
+          <rootpe_rof>0</rootpe_rof>
+        </rootpe>
+      </pes>
+
+      <!-- C+ECO (e.g., C1850ECO) compset with gx1v6, gx1v7, or tx1v1 resolution on cheyenne
+           POP gets 216x2
+           all other components share 18x2 -->
+      <pes pesize="any" compset="_DATM.*_DICE.*_POP2%ECO">
+        <comment>C+ECO (e.g., C1850ECO); gx1v6, gx1v7, or tx1v1 resolution on cheyenne</comment>
+        <ntasks>
+          <ntasks_ocn>216</ntasks_ocn>
+          <ntasks_ice>18</ntasks_ice>
+          <ntasks_cpl>18</ntasks_cpl>
+          <ntasks_wav>18</ntasks_wav>
+          <ntasks_atm>18</ntasks_atm>
+          <ntasks_glc>18</ntasks_glc>
+          <ntasks_lnd>18</ntasks_lnd>
+          <ntasks_rof>18</ntasks_rof>
+        </ntasks>
+        <nthrds>
+          <nthrds_ocn>2</nthrds_ocn>
+          <nthrds_ice>2</nthrds_ice>
+          <nthrds_cpl>2</nthrds_cpl>
+          <nthrds_wav>2</nthrds_wav>
+          <nthrds_atm>2</nthrds_atm>
+          <nthrds_glc>2</nthrds_glc>
+          <nthrds_lnd>2</nthrds_lnd>
+          <nthrds_rof>2</nthrds_rof>
+        </nthrds>
+        <rootpe>
+          <rootpe_ocn>18</rootpe_ocn>
+          <rootpe_ice>0</rootpe_ice>
+          <rootpe_cpl>0</rootpe_cpl>
+          <rootpe_wav>0</rootpe_wav>
+          <rootpe_atm>0</rootpe_atm>
+          <rootpe_glc>0</rootpe_glc>
+          <rootpe_lnd>0</rootpe_lnd>
+          <rootpe_rof>0</rootpe_rof>
+        </rootpe>
+      </pes>
+
+      <!-- G compset, gx1v6, gx1v7, or tx1v1 on cheyenne:
+           POP gets 144x1
+           all other components share 72x1 -->
+      <pes pesize="any" compset="_DATM.*_CICE.*_POP2[^%]">
+        <comment>G; gx1v6, gx1v7, or tx1v1 resolution on cheyenne</comment>
+        <ntasks>
+          <ntasks_ocn>144</ntasks_ocn>
+          <ntasks_ice>72</ntasks_ice>
+          <ntasks_cpl>72</ntasks_cpl>
+          <ntasks_wav>72</ntasks_wav>
+          <ntasks_atm>72</ntasks_atm>
+          <ntasks_glc>72</ntasks_glc>
+          <ntasks_lnd>72</ntasks_lnd>
+          <ntasks_rof>72</ntasks_rof>
+        </ntasks>
+        <nthrds>
+          <nthrds_ocn>1</nthrds_ocn>
+          <nthrds_ice>1</nthrds_ice>
+          <nthrds_cpl>1</nthrds_cpl>
+          <nthrds_wav>1</nthrds_wav>
+          <nthrds_atm>1</nthrds_atm>
+          <nthrds_glc>1</nthrds_glc>
+          <nthrds_lnd>1</nthrds_lnd>
+          <nthrds_rof>1</nthrds_rof>
+        </nthrds>
+        <rootpe>
+          <rootpe_ocn>72</rootpe_ocn>
+          <rootpe_ice>0</rootpe_ice>
+          <rootpe_cpl>0</rootpe_cpl>
+          <rootpe_wav>0</rootpe_wav>
+          <rootpe_atm>0</rootpe_atm>
+          <rootpe_glc>0</rootpe_glc>
+          <rootpe_lnd>0</rootpe_lnd>
+          <rootpe_rof>0</rootpe_rof>
+        </rootpe>
+      </pes>
+
+      <!-- G+ECO (e.g., G1850ECO) compset, gx1v6, gx1v7, or tx1v1 resolution on cheyenne:
+           POP gets 216x2
+           all other components share 36x2 -->
+      <pes pesize="any" compset="_DATM.*_CICE.*_POP2%ECO">
+        <comment>G+ECO (e.g., G1850ECO); gx1v6, gx1v7, or tx1v1 resolution on cheyenne</comment>
+        <ntasks>
+          <ntasks_ocn>216</ntasks_ocn>
+          <ntasks_ice>36</ntasks_ice>
+          <ntasks_cpl>36</ntasks_cpl>
+          <ntasks_wav>36</ntasks_wav>
+          <ntasks_atm>36</ntasks_atm>
+          <ntasks_glc>36</ntasks_glc>
+          <ntasks_lnd>36</ntasks_lnd>
+          <ntasks_rof>36</ntasks_rof>
+        </ntasks>
+        <nthrds>
+          <nthrds_ocn>2</nthrds_ocn>
+          <nthrds_ice>2</nthrds_ice>
+          <nthrds_cpl>2</nthrds_cpl>
+          <nthrds_wav>2</nthrds_wav>
+          <nthrds_atm>2</nthrds_atm>
+          <nthrds_glc>2</nthrds_glc>
+          <nthrds_lnd>2</nthrds_lnd>
+          <nthrds_rof>2</nthrds_rof>
+        </nthrds>
+        <rootpe>
+          <rootpe_ocn>36</rootpe_ocn>
+          <rootpe_ice>0</rootpe_ice>
+          <rootpe_cpl>0</rootpe_cpl>
+          <rootpe_wav>0</rootpe_wav>
+          <rootpe_atm>0</rootpe_atm>
+          <rootpe_glc>0</rootpe_glc>
+          <rootpe_lnd>0</rootpe_lnd>
+          <rootpe_rof>0</rootpe_rof>
+        </rootpe>
+      </pes>
+    </mach>
+
+    <!-- gx1v6, gx1v7, or tx1v1 resolution on cheyenne  -->
+    <mach name="hobart">
+
+      <!-- C, C+ECO (e.g., C1850ECO) with gx1v6, gx1v7, or tx1v1 on hobart:
+           POP gets 192x1
+           all other components share 48x1 -->
+      <pes pesize="any" compset="_DATM.*_DICE.*_POP2">
+        <comment>C (with or without ECO); gx1v6, gx1v7, or tx1v1 resolution on hobart</comment>
+        <ntasks>
+          <ntasks_ocn>192</ntasks_ocn>
+          <ntasks_ice>48</ntasks_ice>
+          <ntasks_cpl>48</ntasks_cpl>
+          <ntasks_wav>48</ntasks_wav>
+          <ntasks_atm>48</ntasks_atm>
+          <ntasks_glc>48</ntasks_glc>
+          <ntasks_lnd>48</ntasks_lnd>
+          <ntasks_rof>48</ntasks_rof>
+        </ntasks>
+        <nthrds>
+          <nthrds_ocn>1</nthrds_ocn>
+          <nthrds_ice>1</nthrds_ice>
+          <nthrds_cpl>1</nthrds_cpl>
+          <nthrds_wav>1</nthrds_wav>
+          <nthrds_atm>1</nthrds_atm>
+          <nthrds_glc>1</nthrds_glc>
+          <nthrds_lnd>1</nthrds_lnd>
+          <nthrds_rof>1</nthrds_rof>
+        </nthrds>
+        <rootpe>
+          <rootpe_ocn>48</rootpe_ocn>
+          <rootpe_ice>0</rootpe_ice>
+          <rootpe_cpl>0</rootpe_cpl>
+          <rootpe_wav>0</rootpe_wav>
+          <rootpe_atm>0</rootpe_atm>
+          <rootpe_glc>0</rootpe_glc>
+          <rootpe_lnd>0</rootpe_lnd>
+          <rootpe_rof>0</rootpe_rof>
+        </rootpe>
+      </pes>
+
+      <!-- G, G+ECO (e.g., G1850ECO) with gx1v6, gx1v7, or tx1v1 on hobart:
+           POP gets 192x1
+           all other components share 96x1 -->
+      <pes pesize="any" compset="_DATM.*_CICE.*_POP2">
+        <comment>C (with or without ECO); gx1v6, gx1v7, or tx1v1 resolution on hobart</comment>
+        <ntasks>
+          <ntasks_ocn>192</ntasks_ocn>
+          <ntasks_ice>96</ntasks_ice>
+          <ntasks_cpl>96</ntasks_cpl>
+          <ntasks_wav>96</ntasks_wav>
+          <ntasks_atm>96</ntasks_atm>
+          <ntasks_glc>96</ntasks_glc>
+          <ntasks_lnd>96</ntasks_lnd>
+          <ntasks_rof>96</ntasks_rof>
+        </ntasks>
+        <nthrds>
+          <nthrds_ocn>1</nthrds_ocn>
+          <nthrds_ice>1</nthrds_ice>
+          <nthrds_cpl>1</nthrds_cpl>
+          <nthrds_wav>1</nthrds_wav>
+          <nthrds_atm>1</nthrds_atm>
+          <nthrds_glc>1</nthrds_glc>
+          <nthrds_lnd>1</nthrds_lnd>
+          <nthrds_rof>1</nthrds_rof>
+        </nthrds>
+        <rootpe>
+          <rootpe_ocn>96</rootpe_ocn>
+          <rootpe_ice>0</rootpe_ice>
+          <rootpe_cpl>0</rootpe_cpl>
+          <rootpe_wav>0</rootpe_wav>
+          <rootpe_atm>0</rootpe_atm>
+          <rootpe_glc>0</rootpe_glc>
+          <rootpe_lnd>0</rootpe_lnd>
+          <rootpe_rof>0</rootpe_rof>
+        </rootpe>
+      </pes>
+    </mach>
+  </grid>
+
+  <!-- Defaults for tx0.1v2 -->
+  <!-- FIXME: update this for cheyenne -->
+  <grid name="oi%tx0.1v2">
+
+    <mach name="any">
+
+      <pes pesize="any" compset="_DATM.*_DICE.*_POP2">
+        <comment>none</comment>
+        <ntasks>
+          <ntasks_atm>48</ntasks_atm>
+          <ntasks_rof>48</ntasks_rof>
+          <ntasks_cpl>48</ntasks_cpl>
+          <ntasks_ice>48</ntasks_ice>
+          <ntasks_ocn>1024</ntasks_ocn>
+          <ntasks_lnd>48</ntasks_lnd>
+          <ntasks_wav>48</ntasks_wav>
+          <ntasks_glc>48</ntasks_glc>
+        </ntasks>
+        <nthrds>
+          <nthrds_atm>1</nthrds_atm>
+          <nthrds_lnd>1</nthrds_lnd>
+          <nthrds_rof>1</nthrds_rof>
+          <nthrds_ice>1</nthrds_ice>
+          <nthrds_ocn>1</nthrds_ocn>
+          <nthrds_glc>1</nthrds_glc>
+          <nthrds_wav>1</nthrds_wav>
+          <nthrds_cpl>1</nthrds_cpl>
+        </nthrds>
+        <rootpe>
+          <rootpe_atm>0</rootpe_atm>
+          <rootpe_rof>48</rootpe_rof>
+          <rootpe_cpl>144</rootpe_cpl>
+          <rootpe_ice>192</rootpe_ice>
+          <rootpe_ocn>0</rootpe_ocn>
+          <rootpe_lnd>0</rootpe_lnd>
+          <rootpe_wav>0</rootpe_wav>
+          <rootpe_glc>0</rootpe_glc>
+        </rootpe>
+      </pes>
+
+      <pes pesize="any" compset="_DATM.*_CICE.*_POP2">
+        <comment>none</comment>
+        <ntasks>
+          <ntasks_atm>48</ntasks_atm>
+          <ntasks_lnd>48</ntasks_lnd>
+          <ntasks_rof>48</ntasks_rof>
+          <ntasks_ice>1024</ntasks_ice>
+          <ntasks_ocn>1024</ntasks_ocn>
+          <ntasks_glc>48</ntasks_glc>
+          <ntasks_wav>48</ntasks_wav>
+          <ntasks_cpl>48</ntasks_cpl>
+        </ntasks>
+        <nthrds>
+          <nthrds_atm>1</nthrds_atm>
+          <nthrds_lnd>1</nthrds_lnd>
+          <nthrds_rof>1</nthrds_rof>
+          <nthrds_ice>1</nthrds_ice>
+          <nthrds_ocn>1</nthrds_ocn>
+          <nthrds_glc>1</nthrds_glc>
+          <nthrds_wav>1</nthrds_wav>
+          <nthrds_cpl>1</nthrds_cpl>
+        </nthrds>
+        <rootpe>
+          <rootpe_atm>0</rootpe_atm>
+          <rootpe_lnd>48</rootpe_lnd>
+          <rootpe_rof>48</rootpe_rof>
+          <rootpe_ice>0</rootpe_ice>
+          <rootpe_ocn>0</rootpe_ocn>
+          <rootpe_glc>96</rootpe_glc>
+          <rootpe_wav>0</rootpe_wav>
+          <rootpe_cpl>144</rootpe_cpl>
+        </rootpe>
+      </pes>
+    </mach>
+  </grid>
+
+  <!-- Defaults for tx0.1v3 -->
+  <!-- FIXME: update this for cheyenne -->
+  <grid name="oi%tx0.1v3">
+
+    <mach name="any">
+
+      <pes pesize="any" compset="_DATM.*_DICE.*_POP2">
+        <comment>none</comment>
+        <ntasks>
+          <ntasks_atm>48</ntasks_atm>
+          <ntasks_rof>48</ntasks_rof>
+          <ntasks_cpl>48</ntasks_cpl>
+          <ntasks_ice>48</ntasks_ice>
+          <ntasks_ocn>2208</ntasks_ocn>
+          <ntasks_lnd>48</ntasks_lnd>
+          <ntasks_wav>48</ntasks_wav>
+          <ntasks_glc>48</ntasks_glc>
+        </ntasks>
+        <nthrds>
+          <nthrds_atm>1</nthrds_atm>
+          <nthrds_lnd>1</nthrds_lnd>
+          <nthrds_rof>1</nthrds_rof>
+          <nthrds_ice>1</nthrds_ice>
+          <nthrds_ocn>1</nthrds_ocn>
+          <nthrds_glc>1</nthrds_glc>
+          <nthrds_wav>1</nthrds_wav>
+          <nthrds_cpl>1</nthrds_cpl>
+        </nthrds>
+        <rootpe>
+          <rootpe_atm>0</rootpe_atm>
+          <rootpe_rof>0</rootpe_rof>
+          <rootpe_cpl>0</rootpe_cpl>
+          <rootpe_ice>0</rootpe_ice>
+          <rootpe_ocn>48</rootpe_ocn>
+          <rootpe_lnd>0</rootpe_lnd>
+          <rootpe_wav>0</rootpe_wav>
+          <rootpe_glc>0</rootpe_glc>
+        </rootpe>
+      </pes>
+
+      <pes pesize="any" compset="_DATM.*_CICE.*_POP2">
+        <comment>none</comment>
+        <ntasks>
+          <ntasks_atm>48</ntasks_atm>
+          <ntasks_lnd>48</ntasks_lnd>
+          <ntasks_rof>48</ntasks_rof>
+          <ntasks_ice>828</ntasks_ice>
+          <ntasks_ocn>2208</ntasks_ocn>
+          <ntasks_glc>48</ntasks_glc>
+          <ntasks_wav>48</ntasks_wav>
+          <ntasks_cpl>828</ntasks_cpl>
+        </ntasks>
+        <nthrds>
+          <nthrds_atm>1</nthrds_atm>
+          <nthrds_lnd>1</nthrds_lnd>
+          <nthrds_rof>1</nthrds_rof>
+          <nthrds_ice>1</nthrds_ice>
+          <nthrds_ocn>1</nthrds_ocn>
+          <nthrds_glc>1</nthrds_glc>
+          <nthrds_wav>1</nthrds_wav>
+          <nthrds_cpl>1</nthrds_cpl>
+        </nthrds>
+        <rootpe>
+          <rootpe_atm>0</rootpe_atm>
+          <rootpe_lnd>0</rootpe_lnd>
+          <rootpe_rof>0</rootpe_rof>
+          <rootpe_ice>0</rootpe_ice>
+          <rootpe_ocn>828</rootpe_ocn>
+          <rootpe_glc>0</rootpe_glc>
+          <rootpe_wav>0</rootpe_wav>
+          <rootpe_cpl>0</rootpe_cpl>
+        </rootpe>
+      </pes>
+    </mach>
+
+    <mach name="cheyenne">
+
+      <pes pesize="any" compset="_DATM.*_DICE.*_POP2">
+        <comment>none</comment>
+        <ntasks>
+          <ntasks_atm>72</ntasks_atm>
+          <ntasks_rof>72</ntasks_rof>
+          <ntasks_cpl>72</ntasks_cpl>
+          <ntasks_ice>72</ntasks_ice>
+          <ntasks_ocn>2208</ntasks_ocn>
+          <ntasks_lnd>72</ntasks_lnd>
+          <ntasks_wav>72</ntasks_wav>
+          <ntasks_glc>72</ntasks_glc>
+        </ntasks>
+        <nthrds>
+          <nthrds_atm>1</nthrds_atm>
+          <nthrds_lnd>1</nthrds_lnd>
+          <nthrds_rof>1</nthrds_rof>
+          <nthrds_ice>1</nthrds_ice>
+          <nthrds_ocn>1</nthrds_ocn>
+          <nthrds_glc>1</nthrds_glc>
+          <nthrds_wav>1</nthrds_wav>
+          <nthrds_cpl>1</nthrds_cpl>
+        </nthrds>
+        <rootpe>
+          <rootpe_atm>0</rootpe_atm>
+          <rootpe_rof>0</rootpe_rof>
+          <rootpe_cpl>0</rootpe_cpl>
+          <rootpe_ice>0</rootpe_ice>
+          <rootpe_ocn>72</rootpe_ocn>
+          <rootpe_lnd>0</rootpe_lnd>
+          <rootpe_wav>0</rootpe_wav>
+          <rootpe_glc>0</rootpe_glc>
+        </rootpe>
+      </pes>
+
+      <pes pesize="any" compset="_DATM.*_CICE.*_POP2">
+        <comment>none</comment>
+        <ntasks>
+          <ntasks_atm>72</ntasks_atm>
+          <ntasks_lnd>72</ntasks_lnd>
+          <ntasks_rof>72</ntasks_rof>
+          <ntasks_ice>828</ntasks_ice>
+          <ntasks_ocn>2208</ntasks_ocn>
+          <ntasks_glc>72</ntasks_glc>
+          <ntasks_wav>72</ntasks_wav>
+          <ntasks_cpl>828</ntasks_cpl>
+        </ntasks>
+        <nthrds>
+          <nthrds_atm>1</nthrds_atm>
+          <nthrds_lnd>1</nthrds_lnd>
+          <nthrds_rof>1</nthrds_rof>
+          <nthrds_ice>1</nthrds_ice>
+          <nthrds_ocn>1</nthrds_ocn>
+          <nthrds_glc>1</nthrds_glc>
+          <nthrds_wav>1</nthrds_wav>
+          <nthrds_cpl>1</nthrds_cpl>
+        </nthrds>
+        <rootpe>
+          <rootpe_atm>0</rootpe_atm>
+          <rootpe_lnd>0</rootpe_lnd>
+          <rootpe_rof>0</rootpe_rof>
+          <rootpe_ice>0</rootpe_ice>
+          <rootpe_ocn>828</rootpe_ocn>
+          <rootpe_glc>0</rootpe_glc>
+          <rootpe_wav>0</rootpe_wav>
+          <rootpe_cpl>0</rootpe_cpl>
+        </rootpe>
+      </pes>
+    </mach>
+  </grid>
+
+</config_pes>

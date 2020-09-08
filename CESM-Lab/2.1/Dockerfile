@@ -67,15 +67,29 @@ RUN export PATH=${NB_PYTHON_PREFIX}/bin:${PATH} && \
     find ${CONDA_DIR} -follow -type f -name '*.pyc' -delete && \
     find ${CONDA_DIR} -follow -type f -name '*.js.map' -delete 
 
+RUN sudo yum install -y xmlstarlet
+
 COPY Files/start /srv
 RUN sudo chmod +x /srv/start 
 
 COPY Files/cesm_aliases.ipy /etc/ipython/
 RUN  sudo /bin/bash -c 'echo "c.InteractiveShellApp.exec_files = [ \"/etc/ipython/cesm_aliases.ipy\" ] " >> /etc/ipython/ipython_config.py'
 
+COPY Files/tutorials /srv/tutorials
+
+COPY Files/config_pes.xml /opt/ncar/cesm2/cime_config/
+COPY Files/configs/cam/config_pes.xml /opt/ncar/cesm2/components/cam/cime_config/
+COPY Files/configs/cice/config_pes.xml /opt/ncar/cesm2/components/cice/cime_config/
+COPY Files/configs/cism/config_pes.xml /opt/ncar/cesm2/components/cism/cime_config/
+COPY Files/configs/pop/config_pes.xml /opt/ncar/cesm2/components/pop/cime_config/
+COPY Files/configs/clm/config_pes.xml /opt/ncar/cesm2/components/clm/cime_config/
+
+COPY Files/env_batch.py /opt/ncar/cesm2/cime/scripts/lib/CIME/XML/env_batch.py
+
+ENV CESMROOT=/opt/ncar/cesm2
 
 
-#EXPOSE 8888
+EXPOSE 8888
 USER user
 WORKDIR /home/user
 ENV SHELL /bin/bash
