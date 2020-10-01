@@ -15,6 +15,7 @@ RUN yum -y update && \
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm && \
     yum -y install vim emacs-nox git subversion which sudo csh make m4 cmake wget file byacc curl-devel zlib-devel && \
     yum -y install perl-XML-LibXML gcc-gfortran gcc-c++ dnf-plugins-core python3 perl-core && \
+    yum -y install ftp xmlstarlet diffutils  && \
     dnf --enablerepo=PowerTools install -y blas-devel lapack-devel && \
     ln -s /usr/bin/python3 /usr/bin/python && \
     echo '/usr/local/lib' > /etc/ld.so.conf.d/local.conf && \
