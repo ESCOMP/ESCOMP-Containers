@@ -73,7 +73,6 @@ RUN sudo chmod +x /srv/start
 COPY Files/cesm_aliases.ipy /etc/ipython/
 RUN  sudo /bin/bash -c 'echo "c.InteractiveShellApp.exec_files = [ \"/etc/ipython/cesm_aliases.ipy\" ] " >> /etc/ipython/ipython_config.py'
 
-#COPY Files/tutorials /srv/tutorials
 RUN git clone https://github.com/NCAR/CESM-Lab-Tutorial.git /srv/tutorials
 COPY Files/cesm.py /srv/conda/envs/default/lib/python3.7/site-packages/
 COPY Files/cartopy/shapefiles /srv/conda/envs/default/lib/python3.7/site-packages/cartopy/data/shapefiles/
@@ -84,4 +83,3 @@ USER user
 WORKDIR /home/user
 ENV SHELL /bin/bash
 ENTRYPOINT ["/srv/start"]
-#ENTRYPOINT ["/opt/conda/bin/jupyter", "lab", "--ip=0.0.0.0", "--no-browser", "--NotebookApp.token=''", "--NotebookApp.password=''"]
