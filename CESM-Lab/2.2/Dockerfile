@@ -73,9 +73,10 @@ RUN sudo chmod +x /srv/start
 COPY Files/cesm_aliases.ipy /etc/ipython/
 RUN  sudo /bin/bash -c 'echo "c.InteractiveShellApp.exec_files = [ \"/etc/ipython/cesm_aliases.ipy\" ] " >> /etc/ipython/ipython_config.py'
 
+ADD https://api.github.com/repos/NCAR/CESM-Lab-Tutorial/git/refs/heads/master version.json
 RUN git clone https://github.com/NCAR/CESM-Lab-Tutorial.git /srv/tutorials
-COPY Files/cesm.py /srv/conda/envs/default/lib/python3.7/site-packages/
 COPY Files/cartopy/shapefiles /srv/conda/envs/default/lib/python3.7/site-packages/cartopy/data/shapefiles/
+COPY Files/cesm.py /srv/conda/envs/default/lib/python3.7/site-packages/
 
 
 EXPOSE 8888

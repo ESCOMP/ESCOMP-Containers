@@ -19,6 +19,7 @@ sudo xmlstarlet ed --inplace -u "config_machines/machine[@MACH='container']/MAX_
 
 # ==== ONLY EDIT WITHIN THIS BLOCK =====
 
+
 exec jupyter lab --ip=0.0.0.0 --NotebookApp.token='' --NotebookApp.password=''
 
 #exec "$@"
