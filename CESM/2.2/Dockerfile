@@ -3,25 +3,22 @@
 ##############################
 
 # Use the ESCOMP centos8 base - this is a base install of CentOS, plus NetCDF/HDF5/PNetCDF/MPICH
-FROM escomp/base-centos8
+FROM escomp/base:centos8
 
 # Install CESM:
 COPY Files/ea002e626aee6bc6643e8ab5f998e5e4 /root/.subversion/auth/svn.ssl.server/
-RUN mkdir -p /opt/ncar && \
+RUN sudo mkdir -p /opt/ncar && \
     cd /opt/ncar && \
-    git clone -b release-cesm2.2.0 https://github.com/ESCOMP/cesm.git cesm2 && \
+    sudo git clone -b release-cesm2.2.0 https://github.com/ESCOMP/cesm.git cesm2 && \
     cd cesm2 && \
-    ./manage_externals/checkout_externals 
+    sudo ./manage_externals/checkout_externals 
 
 # Set up the environment - create the group and user, the shell variables, the input data directory and sudo access:
-RUN groupadd ncar && \
-    useradd -c 'CESM User' -d /home/user -g ncar -m -s /bin/bash user && \
-    echo 'export CESMDATAROOT=${HOME}' >> /etc/profile.d/cesm.sh && \
-    echo 'export CIME_MACHINE=container' >> /etc/profile.d/cesm.sh && \
-    echo 'export USER=$(whoami)' >> /etc/profile.d/cesm.sh && \
-    echo 'export PS1="[\u@cesm2.2 \W]\$ "' >> /etc/profile.d/cesm.sh && \
-    echo 'export PATH=${PATH}:/opt/ncar/cesm2/cime/scripts' >> /etc/profile.d/cesm.sh && \
-    echo 'user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers.d/ncar 
+RUN sudo echo 'export CESMDATAROOT=${HOME}' | sudo tee /etc/profile.d/escomp.sh && \
+    sudo echo 'export CIME_MACHINE=container' | sudo tee -a /etc/profile.d/escomp.sh && \
+    sudo echo 'export USER=$(whoami)' | sudo tee -a /etc/profile.d/escomp.sh && \
+    sudo echo 'export PS1="[\u@cesm2.2 \W]\$ "' | sudo tee -a /etc/profile.d/escomp.sh && \
+    sudo echo 'export PATH=${PATH}:/opt/ncar/cesm2/cime/scripts' | sudo tee -a /etc/profile.d/escomp.sh
 
 
 # Add the container versions of the config_machines & config_compilers settings - later, integrate these into CIME
@@ -39,11 +36,6 @@ COPY Files/configs/cism/config_pes.xml /opt/ncar/cesm2/components/cism/cime_conf
 COPY Files/configs/pop/config_pes.xml /opt/ncar/cesm2/components/pop/cime_config/
 COPY Files/configs/clm/config_pes.xml /opt/ncar/cesm2/components/clm/cime_config/
 
-ENV CESMROOT=/opt/ncar/cesm2 \
-    SHELL=/bin/bash \
-    LANG=C.UTF-8  \
-    LC_ALL=C.UTF-8 
+ENV CESMROOT=/opt/ncar/cesm2 
 
-USER user
-WORKDIR /home/user
-ENTRYPOINT ["/bin/bash", "-l"]
+CMD ["/bin/bash", "-l"]

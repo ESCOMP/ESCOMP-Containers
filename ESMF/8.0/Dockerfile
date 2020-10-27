@@ -3,7 +3,7 @@
 ##############################
 
 # Use the ESCOMP centos8 base - this is a base install of CentOS, plus NetCDF/HDF5/PNetCDF/MPICH
-FROM escomp/base-centos8
+FROM escomp/base:centos8
 
 ENV ESMF_SLUG="ESMF_8_0_1"
 

@@ -12,7 +12,7 @@ RUN sudo yum install -y graphviz libnsl libspatialite libspatialite-devel xmlsta
 ENV CONDA_VERSION=4.8.5-1 \
     CONDA_ENV=default \
     NB_USER=user \
-    NB_GROUP=ncar \
+    NB_GROUP=escomp \
     NB_UID=1000 \
     SHELL=/bin/bash \
     CONDA_DIR=/srv/conda

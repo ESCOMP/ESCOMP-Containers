@@ -76,3 +76,17 @@ RUN  mkdir /tmp/sources && \
      ldconfig && \
      rm -rf /tmp/sources
 
+RUN groupadd escomp && \
+    useradd -c 'ESCOMP User' -d /home/user -g escomp -m -s /bin/bash user && \
+    echo 'export USER=$(whoami)' >> /etc/profile.d/escomp.sh && \
+    echo 'export PS1="[\u@escomp \W]\$ "' >> /etc/profile.d/escomp.sh && \
+    echo 'user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers.d/escomp
+
+ENV SHELL=/bin/bash \
+    LANG=C.UTF-8  \
+    LC_ALL=C.UTF-8
+
+USER user
+WORKDIR /home/user
+CMD ["/bin/bash", "-l"]
+#ENTRYPOINT ["/bin/bash", "-l"]
