@@ -20,7 +20,7 @@ RUN yum -y update && \
                    texlive-dvisvgm texlive-metafont texlive-ec texlive-titlesec texlive-babel-english texlive-tabulary \ 
                    texlive-framed texlive-wrapfig texlive-parskip texlive-upquote texlive-capt-of texlive-needspace \
                    texlive-times texlive-makeindex texlive-helvetic texlive-courier texlive-gsftopk texlive-dvips texlive-mfware texlive-dvisvgm && \
-    pip3 install rst2pdf sphinx && \
+    pip3 install rst2pdf sphinx sphinxcontrib-programoutput && \
     pip3 install git+https://github.com/esmci/sphinx_rtd_theme.git@version-dropdown-with-fixes && \
     dnf --enablerepo=PowerTools install -y blas-devel lapack-devel && \
     ln -s /usr/bin/python3 /usr/bin/python && \

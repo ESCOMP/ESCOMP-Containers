@@ -18,6 +18,7 @@ RUN sudo echo 'export CESMDATAROOT=${HOME}' | sudo tee /etc/profile.d/escomp.sh 
     sudo echo 'export CIME_MACHINE=container' | sudo tee -a /etc/profile.d/escomp.sh && \
     sudo echo 'export USER=$(whoami)' | sudo tee -a /etc/profile.d/escomp.sh && \
     sudo echo 'export PS1="[\u@cesm2.2 \W]\$ "' | sudo tee -a /etc/profile.d/escomp.sh && \
+    sudo echo 'ulimit -s unlimited' | sudo tee -a /etc/profile.d/escomp.sh && \
     sudo echo 'export PATH=${PATH}:/opt/ncar/cesm2/cime/scripts' | sudo tee -a /etc/profile.d/escomp.sh
 
 
@@ -35,6 +36,15 @@ COPY Files/configs/cice/config_pes.xml /opt/ncar/cesm2/components/cice/cime_conf
 COPY Files/configs/cism/config_pes.xml /opt/ncar/cesm2/components/cism/cime_config/
 COPY Files/configs/pop/config_pes.xml /opt/ncar/cesm2/components/pop/cime_config/
 COPY Files/configs/clm/config_pes.xml /opt/ncar/cesm2/components/clm/cime_config/
+
+# Fix for SCAM with GNU in DEBUG mode (ESCOMP/CAM issue #257)
+COPY Files/micro_mg3_0.F90 /opt/ncar/cesm2/components/cam/src/physics/pumas/micro_mg3_0.F90
+
+# Fix for issue with mpi-serial:
+COPY Files/scam_shell_commands /opt/ncar/cesm2/components/cam/cime_config/usermods_dirs/scam_mandatory/shell_commands
+
+# And add the fixed 'create_scam6_iop' script for SCAM:
+COPY Files/create_scam6_iop /opt/ncar/cesm2/components/cam/bld/scripts
 
 ENV CESMROOT=/opt/ncar/cesm2 
 
