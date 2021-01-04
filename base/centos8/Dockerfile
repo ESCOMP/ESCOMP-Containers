@@ -22,7 +22,7 @@ RUN yum -y update && \
                    texlive-times texlive-makeindex texlive-helvetic texlive-courier texlive-gsftopk texlive-dvips texlive-mfware texlive-dvisvgm && \
     pip3 install rst2pdf sphinx sphinxcontrib-programoutput && \
     pip3 install git+https://github.com/esmci/sphinx_rtd_theme.git@version-dropdown-with-fixes && \
-    dnf --enablerepo=PowerTools install -y blas-devel lapack-devel && \
+    dnf --enablerepo=powertools install -y blas-devel lapack-devel && \
     ln -s /usr/bin/python3 /usr/bin/python && \
     echo '/usr/local/lib' > /etc/ld.so.conf.d/local.conf && \
     ldconfig && \
