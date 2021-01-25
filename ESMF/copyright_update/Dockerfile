@@ -38,7 +38,7 @@ RUN grep -v "vtk" no_cdd_files >  final_files
 
 RUN ./replace_string -nb -nq -s s/2002\-2020/2002\-2021/g -F final_files
 
-cd esmf
-git add .
-git commit -a -m " Copyright update pushed "
-git push origin master
+RUN cd esmf
+RUN git add .
+RUN git commit -a -m " Copyright update pushed "
+RUN git push origin master
