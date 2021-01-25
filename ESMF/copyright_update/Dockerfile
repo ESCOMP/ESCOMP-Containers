@@ -28,7 +28,7 @@ RUN git clone --branch ${ESMF_BRANCH} --depth 1 https://github.com/esmf-org/esmf
 
 RUN git clone https://github.com/esmf-org/esmf-test-scripts.git
 RUN cp -r esmf-test-scripts/copyright_update/replace_string .
-chmod +x replace_string
+RUN chmod +x replace_string
 
 RUN find esmf > outfiles
 RUN grep -v "eps" outfiles > no_eps_files
