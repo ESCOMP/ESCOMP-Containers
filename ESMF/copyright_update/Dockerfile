@@ -24,6 +24,9 @@ RUN echo "ESMF_BRANCH=$ESMF_BRANCH"
 # Clone ESMF
 WORKDIR ${HOME}/sandbox/esmf
 RUN git clone --branch ${ESMF_BRANCH} --depth 1 https://github.com/esmf-org/esmf.git esmf
+RUN cd esmf 
+RUN git checkout copyright_update
+RUN cd ..
 
 
 RUN git clone https://github.com/esmf-org/esmf-test-scripts.git
@@ -40,5 +43,5 @@ RUN ./replace_string -nb -nq -s s/2002\-2020/2002\-2021/g -F final_files
 
 RUN cd esmf
 RUN git add .
-RUN git commit -a -m " Copyright update pushed "
-RUN git push origin master
+RUN git commit -a -m " Copyright update pushed at `date` "
+RUN git push -u origin copyright_update
