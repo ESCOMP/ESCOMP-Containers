@@ -5,7 +5,7 @@ FROM ${DOCKER_NAMESPACE}/esmf-doc-base
 ARG ESMF_BRANCH=""
 RUN echo "ESMF_BRANCH=$ESMF_BRANCH"
 
-ENV ESMF_ARTIFACTS=/artifacts
+ENV ESMF_ARTIFACTS=/log
 RUN mkdir -p ${ESMF_ARTIFACTS}
 
 WORKDIR ${HOME}/sandbox/esmf
@@ -28,6 +28,6 @@ WORKDIR ${ESMF_DIR}
 RUN bash ${HOME}/sandbox/esmf/test_coverage.sh
 
 WORKDIR ${HOME}/sandbox/esmf
-RUN cp -rv log ${ESMF_ARTIFACTS}/log
+RUN cp -rv log ${ESMF_ARTIFACTS}
 
-RUN zip -r ${ESMF_ARTIFACTS}/test_coverage-artifacts.zip ${ESMF_ARTIFACTS}/log
+RUN zip -r ${ESMF_ARTIFACTS}/test_coverage-artifacts.zip ${ESMF_ARTIFACTS}
