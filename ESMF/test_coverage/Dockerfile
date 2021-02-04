@@ -21,12 +21,10 @@ RUN export ESMF_DIR=${HOME}/sandbox/esmf/src-git
 RUN export LOGDIR=${HOME}/sandbox/esmf/store
 
 RUN git clone https://github.com/esmf-org/esmf-test-scripts.git scripts-git
-RUN cp -f scripts-git/test_coverage_script/test_coverage  test_coverage.sh
-RUN chmod +x test_coverage.sh
-RUN cp -f test_coverage.sh  ${HOME}/sandbox/esmf/src-git/
+RUN chmod +x scripts-git/test_coverage_script/test_coverage
 
 WORKDIR ${ESMF_DIR}
-RUN bash ${HOME}/sandbox/esmf/test_coverage.sh
+RUN bash ${HOME}/sandbox/esmf/scripts-git/test_coverage_script/test_coverage
 
 WORKDIR ${HOME}/sandbox/esmf
 RUN cp -rv store ${ESMF_ARTIFACTS}
