@@ -1,61 +1,43 @@
-#############################################
-# Documentation build dependencies for ESMF #
-#############################################
-
-FROM ubuntu:18.04
-
-ENV _DEBIAN_FRONTEND=$DEBIAN_FRONTEND
-# Avoid having to interact with terminal when installing time-related packages
-ENV DEBIAN_FRONTEND=noninteractive
-RUN ln -fs /usr/share/zoneinfo/America/Denver /etc/localtime
-RUN apt-get -y update && apt-get -y install texlive-full latex2html perl csh \
-    git build-essential zip gfortran
-ENV DEBIAN_FRONTEND=$_DEBIAN_FRONTEND
-ENV _DEBIAN_FRONTEND=""
-
-########################################
-# clone ESMF  						   #
-########################################
-
 ARG DOCKER_NAMESPACE=""
+
+FROM ${DOCKER_NAMESPACE}/esmf-doc-base
 
 ARG ESMF_BRANCH=""
 RUN echo "ESMF_BRANCH=$ESMF_BRANCH"
 
-# Clone ESMF
-RUN git clone --branch ${ESMF_BRANCH} --depth 1 https://github.com/esmf-org/esmf.git esmf
+ENV ESMF_ARTIFACTS=/artifacts
+RUN mkdir -p ${ESMF_ARTIFACTS}
 
-ARG ESMF_DIR="esmf/"
+WORKDIR ${HOME}/sandbox/esmf
+RUN git clone --branch ${ESMF_BRANCH} --depth 1 https://github.com/esmf-org/esmf.git src-git
+
+ENV ESMF_DIR=${HOME}/sandbox/esmf/src-git/
+
+RUN export ESMF_DIR=${HOME}/sandbox/esmf/src-git/
+
 RUN echo "ESMF_DIR=$ESMF_DIR"
 
-ARG TAG1="develop"
+ENV TAG1="develop"
+RUN export TAG1="develop"
+
 RUN echo "TAG1=$TAG1"
 
-ARG TAG2="ESMF_8_0_1"
+ENV TAG2="ESMF_8_0_1"
+RUN export TAG2="ESMF_8_0_1"
+
 RUN echo "TAG2=$TAG2"
 
-######################################################
-# clone ESMF-TEST-SCRIPTS and RUN API_CHANGE_SCRIPT  #
-######################################################
-
 RUN git clone https://github.com/esmf-org/esmf-test-scripts.git
-RUN cp -r esmf-test-scripts/API_change_script/* .
+
+RUN cp -rv esmf-test-scripts/API_change_script/harvestAPIsFromRefDoc.py .
 RUN chmod +x  harvestAPIsFromRefDoc.py
 
-RUN ./_harvestAPIs
+RUN cp -rv esmf-test-scripts/API_change_script/_harvestAPIs _harvestAPIs.sh
+RUN chmod +x _harvestAPIs.sh
 
-######################################################
-# clone ESMF-TEST-ARTIFACTS and API LOG PUSH	     #
-######################################################
+RUN bash _harvestAPIs.sh
 
-RUN git clone https://github.com/esmf-org/esmf-test-artifacts.git
+RUN cp -rv APIs*.out ${ESMF_ARTIFACTS}/api
+RUN cp -rv diff*.out ${ESMF_ARTIFACTS}/api
 
-RUN cd esmf-test-artifacts
-RUN mkdir api_change
-RUN cd api_change
-RUN cp -r ../../APIs*.out .
-RUN cp -r ../../diff*.out .
-RUN cd ..
-RUN git add .
-RUN git commit -a -m " API change log pushed in artifacts "
-RUN git push origin master
+RUN zip -r ${ESMF_ARTIFACTS}/api_change-artifacts.zip ${ESMF_ARTIFACTS}/api
