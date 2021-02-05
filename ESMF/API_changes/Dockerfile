@@ -37,7 +37,7 @@ RUN chmod +x _harvestAPIs
 
 RUN bash _harvestAPIs
 
-RUN cp -rv APIs*.out ${ESMF_ARTIFACTS}/api/
-RUN cp -rv diff*.out ${ESMF_ARTIFACTS}/api/
+RUN cp -rv APIs*.out ${ESMF_ARTIFACTS}/
+RUN cp -rv diff*.out ${ESMF_ARTIFACTS}/
 
-RUN zip -r ${ESMF_ARTIFACTS}/api_change-artifacts.zip ${ESMF_ARTIFACTS}/api
+RUN zip -r ${ESMF_ARTIFACTS}/api_change-artifacts.zip ${ESMF_ARTIFACTS}
