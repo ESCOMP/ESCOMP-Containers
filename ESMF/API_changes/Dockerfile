@@ -17,16 +17,16 @@ RUN export ESMF_DIR=${HOME}/sandbox/esmf/src-git/
 
 RUN echo "ESMF_DIR=$ESMF_DIR"
 
-#ENV TAG1="develop"
-#RUN export TAG1="develop"
+ENV TAG1="develop"
+RUN export TAG1="develop"
 
-#RUN echo "TAG1=$TAG1"
+RUN echo "TAG1=$TAG1"
 
-#ARG TAG2=""
-#RUN echo "TAG2=$TAG2"
+ARG TAG2=""
+RUN echo "TAG2=$TAG2"
 
-#ENV TAG2=$TAG2
-#RUN export TAG2=$TAG2
+ENV TAG2=$TAG2
+RUN export TAG2=$TAG2
 
 RUN git clone https://github.com/esmf-org/esmf-test-scripts.git scripts-git
 
