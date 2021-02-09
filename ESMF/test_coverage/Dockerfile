@@ -30,6 +30,6 @@ WORKDIR ${ESMF_DIR}
 RUN bash ../scripts-git/test_coverage_script/test_coverage
 
 WORKDIR ${HOME}/sandbox/esmf
-RUN cp -rv store ${ESMF_ARTIFACTS}
+RUN cp -rv store/*  ${ESMF_ARTIFACTS}/
 
 RUN zip -r ${ESMF_ARTIFACTS}/test_coverage-artifacts.zip ${ESMF_ARTIFACTS}
