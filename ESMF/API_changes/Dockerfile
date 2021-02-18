@@ -5,7 +5,7 @@ FROM ${DOCKER_NAMESPACE}/esmf-doc-base
 ARG ESMF_BRANCH=""
 RUN echo "ESMF_BRANCH=$ESMF_BRANCH"
 
-ENV ESMF_ARTIFACTS=/api
+ENV ESMF_ARTIFACTS=/artifacts
 RUN mkdir -p ${ESMF_ARTIFACTS}
 
 WORKDIR ${HOME}/sandbox/esmf
@@ -30,10 +30,10 @@ RUN export TAG2=$TAG2
 
 RUN git clone https://github.com/esmf-org/esmf-test-scripts.git scripts-git
 
-RUN cp -rv scripts-git/API_change_script/harvestAPIsFromRefDoc.py .
+RUN cp -rf scripts-git/API_change_script/harvestAPIsFromRefDoc.py .
 RUN chmod +x  harvestAPIsFromRefDoc.py
 
-RUN cp -rv scripts-git/API_change_script/_harvestAPIs .
+RUN cp -rf scripts-git/API_change_script/_harvestAPIs .
 RUN chmod +x _harvestAPIs
 
 RUN bash _harvestAPIs
