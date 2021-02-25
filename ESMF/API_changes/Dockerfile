@@ -30,10 +30,10 @@ RUN export TAG2=$TAG2
 
 RUN git clone https://github.com/esmf-org/esmf-test-scripts.git scripts-git
 
-RUN cp -rf scripts-git/API_change_script/harvestAPIsFromRefDoc.py .
+RUN cp -r scripts-git/API_change_script/harvestAPIsFromRefDoc.py .
 RUN chmod +x  harvestAPIsFromRefDoc.py
 
-RUN cp -rf scripts-git/API_change_script/_harvestAPIs .
+RUN cp -r scripts-git/API_change_script/_harvestAPIs .
 RUN chmod +x _harvestAPIs
 
 RUN bash _harvestAPIs
