@@ -9,7 +9,7 @@ ENV ESMF_ARTIFACTS=/artifacts
 RUN mkdir -p ${ESMF_ARTIFACTS}
 
 WORKDIR ${HOME}/sandbox/esmf
-RUN git clone --branch ${ESMF_BRANCH} --depth 1 https://github.com/esmf-org/esmf.git src-git
+RUN git clone --depth 1 https://github.com/esmf-org/esmf.git src-git
 
 ENV ESMF_DIR=${HOME}/sandbox/esmf/src-git/
 
