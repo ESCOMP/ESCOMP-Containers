@@ -17,10 +17,11 @@ RUN export ESMF_DIR=${HOME}/sandbox/esmf/src-git/
 
 RUN echo "ESMF_DIR=$ESMF_DIR"
 
-ENV TAG1="develop"
-RUN export TAG1="develop"
-
+ARG TAG1=""
 RUN echo "TAG1=$TAG1"
+
+ENV TAG1=$TAG1
+RUN export TAG1=$TAG1
 
 ARG TAG2=""
 RUN echo "TAG2=$TAG2"
