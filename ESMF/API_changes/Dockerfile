@@ -40,7 +40,6 @@ RUN export Branch_Tag=$Branch_Tag
 RUN pwd
 RUN ls
 
-RUN cd ${HOME}/sandbox/esmf
 RUN git clone https://github.com/esmf-org/esmf-test-scripts.git scripts-git
 
 RUN pwd
