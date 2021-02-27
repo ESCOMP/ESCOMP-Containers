@@ -37,13 +37,13 @@ RUN export Branch_Tag=$Branch_Tag
 
 RUN git clone https://github.com/esmf-org/esmf-test-scripts.git scripts-git
 
-RUN cp -r scripts-git/API_change_script/harvestAPIsFromRefDoc.py .
-RUN chmod +x  harvestAPIsFromRefDoc.py
+COPY scripts-git/API_change_script/harvestAPIsFromRefDoc.py ${HOME}/sandbox/esmf/harvestAPIsFromRefDoc.py
+RUN chmod +x ${HOME}/sandbox/esmf/harvestAPIsFromRefDoc.py
 
-RUN cp -r scripts-git/API_change_script/_harvestAPIs .
-RUN chmod +x _harvestAPIs
+COPY scripts-git/API_change_script/_harvestAPIs ${HOME}/sandbox/esmf/_harvestAPIs
+RUN chmod +x ${HOME}/sandbox/esmf/_harvestAPIs
 
-RUN bash _harvestAPIs
+RUN ${HOME}/sandbox/esmf/_harvestAPIs
 
 RUN cp -rv APIs*.out ${ESMF_ARTIFACTS}/
 RUN cp -rv diff*.out ${ESMF_ARTIFACTS}/
