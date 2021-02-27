@@ -35,17 +35,18 @@ RUN echo "Branch_Tag=$Branch_Tag"
 ENV Branch_Tag=$Branch_Tag
 RUN export Branch_Tag=$Branch_Tag
 
+WORKDIR ${HOME}/sandbox/esmf
 RUN git clone https://github.com/esmf-org/esmf-test-scripts.git scripts-git
 
-COPY scripts-git/API_change_script/harvestAPIsFromRefDoc.py ${HOME}/sandbox/esmf/harvestAPIsFromRefDoc.py
+COPY ${HOME}/sandbox/esmf/scripts-git/API_change_script/harvestAPIsFromRefDoc.py ${HOME}/sandbox/esmf/harvestAPIsFromRefDoc.py
 RUN chmod +x ${HOME}/sandbox/esmf/harvestAPIsFromRefDoc.py
 
-COPY scripts-git/API_change_script/_harvestAPIs ${HOME}/sandbox/esmf/_harvestAPIs
+COPY ${HOME}/sandbox/esmf/scripts-git/API_change_script/_harvestAPIs ${HOME}/sandbox/esmf/_harvestAPIs
 RUN chmod +x ${HOME}/sandbox/esmf/_harvestAPIs
 
 RUN ${HOME}/sandbox/esmf/_harvestAPIs
 
-RUN cp -rv APIs*.out ${ESMF_ARTIFACTS}/
-RUN cp -rv diff*.out ${ESMF_ARTIFACTS}/
+COPY ${HOME}/sandbox/esmf/APIs*.out ${ESMF_ARTIFACTS}/
+COPY ${HOME}/sandbox/esmf/diff*.out ${ESMF_ARTIFACTS}/
 
 RUN zip -r ${ESMF_ARTIFACTS}/api_change-artifacts.zip ${ESMF_ARTIFACTS}
