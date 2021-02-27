@@ -48,8 +48,8 @@ RUN ls
 RUN cp scripts-git/API_change_script/harvestAPIsFromRefDoc.py .
 RUN chmod +x harvestAPIsFromRefDoc.py
 
-RUN cp ${HOME}/sandbox/esmf/scripts-git/API_change_script/_harvestAPIs ${HOME}/sandbox/esmf/_harvestAPIs
-RUN chmod +x ${HOME}/sandbox/esmf/_harvestAPIs
+RUN cp ${HOME}/sandbox/esmf/scripts-git/API_change_script/_harvestAPIs .
+RUN chmod +x _harvestAPIs
 
 RUN pwd
 RUN ls
