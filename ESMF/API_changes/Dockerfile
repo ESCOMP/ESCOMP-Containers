@@ -11,9 +11,9 @@ RUN mkdir -p ${ESMF_ARTIFACTS}
 WORKDIR ${HOME}/sandbox/esmf
 RUN git clone https://github.com/esmf-org/esmf.git src-git
 
-ENV ESMF_DIR=${HOME}/sandbox/esmf/src-git/
+ENV ESMF_DIR=${HOME}/sandbox/esmf/src-git
 
-RUN export ESMF_DIR=${HOME}/sandbox/esmf/src-git/
+RUN export ESMF_DIR=${HOME}/sandbox/esmf/src-git
 
 RUN echo "ESMF_DIR=$ESMF_DIR"
 
@@ -28,6 +28,12 @@ RUN echo "TAG2=$TAG2"
 
 ENV TAG2=$TAG2
 RUN export TAG2=$TAG2
+
+ARG Branch_Tag=""
+RUN echo "Branch_Tag=$Branch_Tag"
+
+ENV Branch_Tag=$Branch_Tag
+RUN export Branch_Tag=$Branch_Tag
 
 RUN git clone https://github.com/esmf-org/esmf-test-scripts.git scripts-git
 
