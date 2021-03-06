@@ -1,5 +1,8 @@
 FROM ubuntu
 
+ARG ESMF_BRANCH=""
+ENV ESMF_BRANCH=${ESMF_BRANCH}
+
 ENV _DEBIAN_FRONTEND=$DEBIAN_FRONTEND
 # Avoid having to interact with terminal when installing time-related packages
 ENV DEBIAN_FRONTEND=noninteractive
@@ -10,7 +13,7 @@ ENV DEBIAN_FRONTEND=$_DEBIAN_FRONTEND
 ENV _DEBIAN_FRONTEND=""
 
 WORKDIR /opt
-RUN git clone --depth 1 https://github.com/esmf-org/esmf.git
+RUN git clone --branch ${ESMF_BRANCH} --depth 1 https://github.com/esmf-org/esmf.git
 
 ENV ESMF_DIR=/opt/esmf
 ENV ESMF_INSTALL_PREFIX=/usr/local
@@ -26,4 +29,4 @@ RUN make install 2>&1 | tee esmf-make-install.out
 RUN rm -rf ${ESMF_DIR}
 
 ENV ESMFMKFILE=${ESMF_INSTALL_PREFIX}/lib/esmf.mk
-RUN pip3 install sphinx sphinxcontrib-packages sphinxcontrib-bibtex numpy nose
+RUN pip3 install sphinx sphinxcontrib-packages sphinxcontrib-bibtex==1.0.0 numpy nose

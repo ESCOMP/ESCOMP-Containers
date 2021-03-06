@@ -1,8 +1,8 @@
 ARG DOCKER_NAMESPACE=""
-
-FROM ${DOCKER_NAMESPACE}/esmpy-doc-base
-
 ARG ESMF_BRANCH=""
+
+FROM ${DOCKER_NAMESPACE}/esmpy-doc-base:${ESMF_BRANCH}
+
 RUN echo "ESMF_BRANCH=$ESMF_BRANCH"
 
 ENV ARTIFACTS=/artifacts/doc-esmpy
