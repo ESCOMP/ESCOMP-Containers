@@ -1,8 +1,5 @@
 FROM ubuntu
 
-ARG ESMF_BRANCH=""
-ENV ESMF_BRANCH=${ESMF_BRANCH}
-
 ENV _DEBIAN_FRONTEND=$DEBIAN_FRONTEND
 # Avoid having to interact with terminal when installing time-related packages
 ENV DEBIAN_FRONTEND=noninteractive
@@ -11,6 +8,9 @@ RUN apt-get --yes update && apt-get --yes install latexmk texlive-fonts-recommen
     python3-pip
 ENV DEBIAN_FRONTEND=$_DEBIAN_FRONTEND
 ENV _DEBIAN_FRONTEND=""
+
+ARG ESMF_BRANCH=""
+RUN echo "ESMF_BRANCH=$ESMF_BRANCH"
 
 WORKDIR /opt
 RUN git clone --branch ${ESMF_BRANCH} --depth 1 https://github.com/esmf-org/esmf.git
