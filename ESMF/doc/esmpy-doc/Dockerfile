@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:focal
 
 ENV _DEBIAN_FRONTEND=$DEBIAN_FRONTEND
 # Avoid having to interact with terminal when installing time-related packages
