@@ -34,7 +34,7 @@ ENV ESMFMKFILE=${ESMF_INSTALL_LIBDIR}/esmf.mk
 RUN pip3 install sphinx sphinxcontrib-packages sphinxcontrib-bibtex==1.0.0 numpy nose
 
 WORKDIR ${ESMF_DIR}/src/addon/ESMPy
-RUN python3 setup.py build
+RUN pip install .
 WORKDIR doc
 RUN make html latexpdf 2>&1 | tee ${ARTIFACTS}/esmpy-make-doc.out
 
